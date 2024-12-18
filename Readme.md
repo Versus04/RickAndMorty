@@ -79,4 +79,3 @@ A comprehensive application for exploring the Rick and Morty universe, featuring
 
 ---
 
-Made with ❤️ by Rick and Morty fans, for Rick and Morty fans.

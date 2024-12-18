@@ -1,11 +1,14 @@
 package com.example.rickandmorty.network
 import retrofit2.Response
 import com.example.rickandmorty.model.CharacterDTO
+import com.example.rickandmorty.model.CharacterResult
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.create
 import retrofit2.http.GET
+import retrofit2.http.Query
+
 private const val BASE_URL="https://rickandmortyapi.com/api/"
 interface RickApi {
 

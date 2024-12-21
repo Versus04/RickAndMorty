@@ -33,38 +33,14 @@ import coil.compose.AsyncImage
 
 
 
-@Composable
-fun characterList(viewModel: HomeScreenViewModel)
-{
-    val characters = viewModel.characters.collectAsState(initial = emptyList())
 
-    /*LazyColumn {
-        items(characters.value) { character ->
-            // Add character item composable here
-            Text(character.toString())
-        } */
-    LazyVerticalGrid(columns = GridCells.Fixed(4),contentPadding = PaddingValues(8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp) ,) {
-        items(characters.value)
-        {
-            characters->
-            Card() {
-
-                    AsyncImage(model = characters.image, contentDescription = null)
-                    Text(characters.name)
-
-            }
-
-        }
-    }
-}
 @Composable
 fun MainScreen(viewModel: HomeScreenViewModel)
 {
     val navController = rememberNavController()
     val screenlist =listOf<Screen>(Screen.Home, Screen.Episode, Screen.Character, Screen.Locations)
     val character = viewModel.characters.collectAsState()
+    val locations = viewModel.location.collectAsState()
     var selectedScreen by remember { mutableStateOf("home") }
     var episodes = viewModel.episodes.collectAsState()
     Scaffold(bottomBar = {NavigationBar{
@@ -92,9 +68,13 @@ fun MainScreen(viewModel: HomeScreenViewModel)
             {
                 EpisodeScreen(episodes.value)
             }
-            composable(Screen.Home.route)
+            composable(Screen.Character.route)
             {
-                HomeScreen()
+                CharacterScreen(character.value)
+            }
+            composable(Screen.Locations.route)
+            {
+                LocationScreen(locations.value)
             }
         }
 

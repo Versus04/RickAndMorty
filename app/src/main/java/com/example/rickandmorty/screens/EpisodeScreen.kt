@@ -50,35 +50,12 @@ fun EpisodeScreen(results: List<EpisodeResult>)
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.secondary)
 
-                    Text(text = "Creation Date : ${result.created}",
+                    Text(text = "Creation Date : ${result.created.substring(0..9)}",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.tertiary
                         )
                 }
             }
-
-
         }
     }
-}
-@Preview
-@Composable
-fun EpisodePreview()
-{
-    val sampleEpisode = listOf(EpisodeResult(
-        id = 1,
-        name = "Pilot",
-        air_date = "December 2, 2013",
-        episode = "S01E01",
-        characters = listOf(
-            "https://rickandmortyapi.com/api/character/1",
-            "https://rickandmortyapi.com/api/character/2",
-            "https://rickandmortyapi.com/api/character/35",
-            "https://rickandmortyapi.com/api/character/38"
-            // Add more URLs as needed
-        ),
-        url = "https://rickandmortyapi.com/api/episode/1",
-        created = "2017-11-10T12:56:33.798Z"
-    ))
-    EpisodeScreen(sampleEpisode)
 }

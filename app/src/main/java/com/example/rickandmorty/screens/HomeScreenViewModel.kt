@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.rickandmorty.model.CharacterDTO
 import com.example.rickandmorty.model.CharacterResult
 import com.example.rickandmorty.model.EpisodeResult
+import com.example.rickandmorty.model.LocationResult
 import com.example.rickandmorty.network.RickApiService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,6 +20,8 @@ class HomeScreenViewModel : ViewModel()
     val characters: StateFlow<List<CharacterResult>> = _characters
     private val _episodes = MutableStateFlow<List<EpisodeResult>>(emptyList())
     val episodes : StateFlow<List<EpisodeResult>> = _episodes
+    private val _location = MutableStateFlow<List<LocationResult>>(emptyList())
+    val location : StateFlow<List<LocationResult>> = _location
 
     fun getcharacters()
     {
@@ -53,8 +56,25 @@ class HomeScreenViewModel : ViewModel()
             }
         }
     }
+    fun getLocationList()
+    {
+        viewModelScope.launch()
+        {
+            try {
+                val response = RickApiService.retrofitservice.getLocationList()
+                response.body()?.let {
+                        locationresponse->
+                    _location.value=locationresponse.results
+                }
+            }
+            catch (e: Exception)
+            {Log.d("episode", e.toString())
+            }
+        }
+    }
     init {
         getcharacters()
         getEpisodes()
+        getLocationList()
     }
 }

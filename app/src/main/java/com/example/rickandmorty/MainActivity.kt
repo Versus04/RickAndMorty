@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.rickandmorty.screens.HomeScreenViewModel
-import com.example.rickandmorty.screens.Homescreen
+import com.example.rickandmorty.screens.MainScreen
 import com.example.rickandmorty.ui.theme.RickAndMortyTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             RickAndMortyTheme {
-                Homescreen(viewmodel)
+                MainScreen(viewmodel)
             }
         }
     }

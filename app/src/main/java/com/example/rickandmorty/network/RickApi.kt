@@ -2,6 +2,8 @@ package com.example.rickandmorty.network
 import retrofit2.Response
 import com.example.rickandmorty.model.CharacterDTO
 import com.example.rickandmorty.model.CharacterResult
+import com.example.rickandmorty.model.EpisodeDTO
+import com.example.rickandmorty.model.LocationDTO
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -14,6 +16,12 @@ interface RickApi {
 
     @GET("character")
     suspend fun getCharacterList(): Response<CharacterDTO>
+
+    @GET("location")
+    suspend fun  getLocationList(): Response<LocationDTO>
+
+    @GET("episode")
+    suspend fun getAllEpisodes(): Response<EpisodeDTO>
 
 }
 private val retrofit : Retrofit = Retrofit.Builder()

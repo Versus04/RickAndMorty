@@ -15,14 +15,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHost
 import androidx.navigation.compose.NavHost
@@ -43,7 +48,8 @@ fun MainScreen(viewModel: HomeScreenViewModel)
     val locations = viewModel.location.collectAsState()
     var selectedScreen by remember { mutableStateOf("home") }
     var episodes = viewModel.episodes.collectAsState()
-    Scaffold(bottomBar = {NavigationBar{
+    Scaffold(topBar = { topBar(title = "Rick and Morty") }
+        ,bottomBar = {NavigationBar{
         screenlist.forEach { screens->
             NavigationBarItem(icon = { Icon(imageVector = screens.icon,contentDescription = screens.title) },
                 label = { Text(screens.title) },
@@ -85,4 +91,21 @@ fun MainScreen(viewModel: HomeScreenViewModel)
 fun HomeScreen()
 {
 Text("This is homescreen")
+}
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun topBar(title : String )
+{
+    TopAppBar(
+        title = {
+            Text(title)
+        },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+            navigationIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+            actionIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer
+        ),
+    )
+
 }

@@ -57,7 +57,7 @@ fun CharacterCard( character : CharacterResult)
                 contentDescription = null
             , modifier = Modifier
                     .fillMaxWidth()
-                    .height(250.dp), contentScale = ContentScale.Crop)
+                    .height(300.dp), contentScale = ContentScale.FillBounds)
         }
         Column(Modifier.padding(16.dp)) {
             Text(text = character.name ,
